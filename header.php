@@ -4,7 +4,7 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 include "config.php";
 
-// Récupération de l'utilisateur connecté
+
 $user = null;
 $role = null;
 
