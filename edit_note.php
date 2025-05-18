@@ -1,14 +1,14 @@
 <?php
 include "header.php";
 
-// Vérifie que l'utilisateur est connecté et est un enseignant
+
 if (!$user || $role !== 'teacher') {
     http_response_code(403);
     echo "Accès refusé. Cette page est réservée aux enseignants.";
     exit();
 }
 
-// Vérifie que l'ID de la note est présent
+
 if (!isset($_GET['id']) || empty($_GET['id'])) {
     die("ID de la note manquant !");
 }
@@ -16,7 +16,7 @@ if (!isset($_GET['id']) || empty($_GET['id'])) {
 $id = intval($_GET['id']);
 $message = "";
 
-// Récupérer la note
+
 try {
     $stmt = $pdo->prepare("SELECT * FROM grades WHERE id = ?");
     $stmt->execute([$id]);
@@ -29,7 +29,7 @@ try {
     die("Erreur : " . $e->getMessage());
 }
 
-// Mise à jour de la note
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $new_grade = floatval($_POST["grade"]);
 
