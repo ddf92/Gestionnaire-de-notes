@@ -11,13 +11,11 @@ $user_id = $_SESSION['user_id'];
 $success = "";
 $error = "";
 
-// Récupérer les données actuelles
 $stmt = $pdo->prepare("SELECT * FROM users WHERE id = ?");
 $stmt->execute([$user_id]);
 $user = $stmt->fetch(PDO::FETCH_ASSOC);
 $currentImage = $user['profile_image'] ?? null;
 
-// Traitement formulaire
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $newUsername = trim($_POST['username'] ?? '');
     $currentPassword = $_POST['current_password'] ?? '';
@@ -50,7 +48,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 
-    // Upload de nouvelle image
     if (isset($_FILES['profile_image']) && $_FILES['profile_image']['error'] === UPLOAD_ERR_OK) {
         $tmpName = $_FILES['profile_image']['tmp_name'];
         $originalName = basename($_FILES['profile_image']['name']);
@@ -77,7 +74,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 
-    // Suppression de la photo
     if (isset($_POST['delete_image']) && $user['profile_image']) {
         if (file_exists('uploads/' . $user['profile_image'])) {
             unlink('uploads/' . $user['profile_image']);
