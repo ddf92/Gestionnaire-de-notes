@@ -1,7 +1,7 @@
 <?php
 include "header.php";
 
-// Vérifie que l'utilisateur est bien un enseignant
+
 if ($role !== 'teacher') {
     http_response_code(403);
     echo "Accès refusé. Cette page est réservée aux enseignants.";
@@ -9,13 +9,13 @@ if ($role !== 'teacher') {
     exit();
 }
 
-// Récupère les étudiants et les matières
+
 $students = $pdo->query("SELECT id, username FROM users WHERE role = 'student'")->fetchAll();
 $subjects = $pdo->query("SELECT id, name FROM subjects")->fetchAll();
 
 $message = "";
 
-// Traitement du formulaire
+
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $user_id = intval($_POST["user_id"]);
     $subject_id = intval($_POST["subject_id"]);
