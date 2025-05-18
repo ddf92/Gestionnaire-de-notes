@@ -2,7 +2,7 @@
 session_start();
 include "config.php";
 
-// Vérifie si l'utilisateur est connecté
+
 if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit();
@@ -11,19 +11,19 @@ if (!isset($_SESSION['user_id'])) {
 $user = $_SESSION['user'];
 $role = $user['role'];
 
-// Récupération des étudiants (enseignants uniquement)
+
 $students = $role === 'teacher' 
     ? $pdo->query("SELECT id, username FROM users WHERE role = 'student'")->fetchAll() 
     : [];
 
-// Récupération des matières
+
 $subjects = $pdo->query("SELECT id, name FROM subjects")->fetchAll();
 
-// Récupération des filtres
+
 $filterStudent = isset($_GET['student_id']) ? intval($_GET['student_id']) : null;
 $filterSubject = isset($_GET['subject_id']) ? intval($_GET['subject_id']) : null;
 
-// Requête SQL
+
 $sql = "
     SELECT g.id, u.username AS student, s.name AS subject, g.grade
     FROM grades g
