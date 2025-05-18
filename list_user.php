@@ -2,11 +2,11 @@
 include "config.php";
 
 try {
-    // Requête pour récupérer tous les utilisateurs
+  
     $stmt = $pdo->prepare("SELECT * FROM users");
     $stmt->execute();
     
-    // Afficher les résultats
+
     echo "<h2>Liste des utilisateurs</h2>";
     echo "<table border='1'>";
     echo "<tr><th>ID</th><th>Nom</th><th>Email</th></tr>";
