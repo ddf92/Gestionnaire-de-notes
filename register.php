@@ -2,14 +2,13 @@
 session_start();
 include "config.php";
 
-// Traitement du formulaire
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = trim($_POST["username"]);
     $password = $_POST["password"];
     $role = $_POST["role"];
     $teacherCode = $_POST["teacher_code"] ?? '';
 
-    // Vérification du code si le rôle est professeur
+ 
     if ($role === 'teacher' && $teacherCode !== 'PvR9jz6A!2bxP#4yU8fD!1kZ') {
         $error = "❌ Code professeur incorrect. Contactez l'administration.";
     } else {
